@@ -71,7 +71,7 @@ class GPTBlock(nn.Module):
 
 
 class GPT(nn.Module):
-    def __init__(self, vocab_sz, window_sz, dim, n_layers, device, head_dim, n_heads, dropout):
+    def __init__(self, vocab_sz, window_sz, dim, n_layers, device, head_dim, n_heads, dropout, **kwargs):
         super().__init__()
 
         self.device = device

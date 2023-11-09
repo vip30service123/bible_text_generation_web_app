@@ -2,21 +2,23 @@ from src.constant import *
 
 
 def process_string_to_list(input):
-    i = 0
-    out = []
-    # Two pointer run to detect special chars
-    for j in range(len(input)):
-        if input[j] not in SPECIAL_CHA:
-            if input[i] in SPECIAL_CHA:
-                if input[i:j] != ' ':
-                    out.append(input[i:j])
-                i = j
-        else:
-            if input[i:j] != ' ':
-                out.append(input[i:j])
-            i = j
+    # i = 0
+    # out = []
+    # # Two pointer run to detect special chars
+    # for j in range(len(input)):
+    #     if input[j] not in SPECIAL_CHA:
+    #         if input[i] in SPECIAL_CHA:
+    #             if input[i:j] != ' ':
+    #                 out.append(input[i:j])
+    #             i = j
+    #     else:
+    #         if input[i:j] != ' ':
+    #             out.append(input[i:j])
+    #         i = j
 
-    return out
+    # return out
+
+    return input.strip().split(' ')
 
 
 def encode_input(ls):

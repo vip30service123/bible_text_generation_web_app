@@ -1,17 +1,17 @@
 device: 'cpu'
 
-data_path: '/content/drive/MyDrive/bible.txt'
-batch_sz: 64
-window_sz: 256
+vocab_sz: 31405
+
+window_sz: 128
 train_val_percentage: 0.8
 
 
 dim: 256
-n_layers: 12
+n_layers: 6
 head_dim: 128
 n_heads: 32
 context_len: 0
 dropout: 0.2
 
-
+model_path: 'src/GPT_new_ver_2.pt'
 max_length: 50

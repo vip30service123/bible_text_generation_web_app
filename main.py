@@ -4,6 +4,7 @@ import yaml
 
 from src.generate import Generation
 from src.process_data import *
+from src.constant import *
 
 
 with open('configuration.yaml', 'r') as f:
@@ -13,19 +14,16 @@ with open('configuration.yaml', 'r') as f:
 text_generation = Generation(**configs)
 
 
-# app = Flask(__name__)
+app = Flask(__name__)
 
-# @app.route("/", methods = ['POST', 'GET'])
-# def generate_text(name="John"):
+@app.route("/", methods = ['POST', 'GET'])
+def generate_text(name="John"):
 
-#     generated_text = ''
+    generated_text = ''
 
-#     if request.method == 'POST':
-#         generated_text = request.form['input']
+    if request.method == 'POST':
+        text = request.form['input']
+        generated_text = text_generation.generate(text)
     
 
-#     return render_template('home.html', name=name, generated_text=generated_text)
-
-
-
-print(process_string_to_list("I am not "))
+    return render_template('home.html', name=name, generated_text=generated_text)
