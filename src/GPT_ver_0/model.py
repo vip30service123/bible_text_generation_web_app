@@ -1,10 +1,15 @@
+from typing import Dict, List, Optional
+
+
 import torch
 from torch import nn
 import torch.nn.functional as F
 
 
+
+
 class Head(nn.Module):
-    def __init__(self, dim, head_dim, device):
+    def __init__(self, dim: int, head_dim: int, device: str) -> None:
         super().__init__()
 
         self.device = device
@@ -13,7 +18,7 @@ class Head(nn.Module):
         self.key = nn.Linear(dim, head_dim)
         self.value = nn.Linear(dim, head_dim)
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         query = self.query(x)
         key = self.key(x)
         value = self.value(x)
@@ -26,7 +31,14 @@ class Head(nn.Module):
 
 
 class MultiHead(nn.Module):
-    def __init__(self, dim, head_dim, n_heads, dropout, device): # head_dim % n_heads == 0
+    def __init__(
+            self, 
+            dim: int, 
+            head_dim: int, 
+            n_heads: int, 
+            dropout: float, 
+            device: str): # head_dim % n_heads == 0
+        
         super().__init__()
 
         self.multihead = nn.ModuleList(
@@ -35,13 +47,13 @@ class MultiHead(nn.Module):
         self.proj = nn.Linear(head_dim, dim)
         self.dropout = nn.Dropout(dropout)
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         a = [h(x) for h in self.multihead]
         return self.proj(torch.cat(a, dim=-1))
 
 
 class FeedForward(nn.Module):
-    def __init__(self, dim, dropout):
+    def __init__(self, dim: int, dropout: float):
         super().__init__()
 
         self.ffw = nn.Sequential(
@@ -51,12 +63,12 @@ class FeedForward(nn.Module):
             nn.Dropout(dropout)
         )
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         return self.ffw(x)
 
 
 class GPTBlock(nn.Module):
-    def __init__(self, dim, head_dim, n_heads, dropout, device):
+    def __init__(self, dim: int, head_dim: int, n_heads: int, dropout: float, device: str):
         super().__init__()
 
         self.multihead = MultiHead(dim, head_dim, n_heads, dropout, device)
@@ -64,7 +76,7 @@ class GPTBlock(nn.Module):
         self.n1 = nn.LayerNorm(dim)
         self.n2 = nn.LayerNorm(dim)
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         x = x + self.multihead(self.n1(x))
         x = x + self.ffw(self.n2(x))
         return x
@@ -80,7 +92,9 @@ class GPT(nn.Module):
 
         self.word_embedding = nn.Embedding(31405, 256)
         self.position = nn.Embedding(128, 256)
-        self.blocks = nn.Sequential(*[GPTBlock(256, 128, 32, 0.2, 'cpu') for _ in range(6)])
+        self.blocks = nn.Sequential(
+            *[GPTBlock(256, 128, 32, 0.2, 'cpu') for _ in range(6)]
+        )
         self.n = nn.LayerNorm(256)
         self.lout = nn.Linear(256, 31405)
 
@@ -89,10 +103,12 @@ class GPT(nn.Module):
         self,
         input, # B, T
         target=None # B, T
-        ):
+        ) -> Dict[str, torch.Tensor]:
         B, T = input.shape
 
-        x = self.word_embedding(input) + self.position(torch.arange(T).type(torch.int64).to(self.device))   # B, T, dim
+        x = self.word_embedding(input) 
+        pos = self.position(torch.arange(T).type(torch.int64).to(self.device))   # B, T, dim
+        x += pos
         x = self.blocks(x)
         x = self.n(x)
         logits = self.lout(x) # B, T, vocab_sz
@@ -113,7 +129,7 @@ class GPT(nn.Module):
         }
 
 
-    def generate(self, x, max_length=50):
+    def generate(self, x, max_length: int = 50) -> str:
         for _ in range(max_length):
             logits = self(x)['logits'][:,-1,:]
             prob = F.softmax(logits, dim=-1)

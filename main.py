@@ -22,8 +22,8 @@ def generate_text(name="John"):
     generated_text = ''
 
     if request.method == 'POST':
-        text = request.form['input']
-        generated_text = text_generation.generate(text).replace('\n', '</br>')
+        input_text = request.form['input']
+        generated_text = text_generation.generate(input_text).replace('\n', '</br>')
     
 
     return render_template('home.html', name=name, generated_text=generated_text)
