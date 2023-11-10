@@ -2,16 +2,16 @@ from flask import Flask, render_template, request
 import yaml
 
 
-from bible_text_generation_web_app.src.generate import Generation
-from bible_text_generation_web_app.src.process_data import *
-from bible_text_generation_web_app.src.constant import *
+from bible_text_generation_web_app.src.generate import TextGenerationFactory
+
+
 
 
 with open('configuration.yaml', 'r') as f:
     configs = yaml.safe_load(f)
 
 
-text_generation = Generation(**configs)
+text_generation = TextGenerationFactory(**configs)
 
 
 app = Flask(__name__)
@@ -23,8 +23,7 @@ def generate_text(name="John"):
 
     if request.method == 'POST':
         text = request.form['input']
-        ge = text_generation.generate(text).replace('\n', '</br>')
-        generated_text = ge
+        generated_text = text_generation.generate(text).replace('\n', '</br>')
     
 
     return render_template('home.html', name=name, generated_text=generated_text)

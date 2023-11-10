@@ -71,18 +71,18 @@ class GPTBlock(nn.Module):
 
 
 class GPT(nn.Module):
-    def __init__(self, vocab_sz, window_sz, dim, n_layers, device, head_dim, n_heads, dropout, **kwargs):
+    def __init__(self):
         super().__init__()
 
-        self.device = device
-        self.vocab_sz = vocab_sz
+        self.device = 'cpu'
+        self.vocab_sz = 31405
 
 
-        self.word_embedding = nn.Embedding(vocab_sz, dim)
-        self.position = nn.Embedding(window_sz, dim)
-        self.blocks = nn.Sequential(*[GPTBlock(dim, head_dim, n_heads, dropout, device) for _ in range(n_layers)])
-        self.n = nn.LayerNorm(dim)
-        self.lout = nn.Linear(dim, vocab_sz)
+        self.word_embedding = nn.Embedding(31405, 256)
+        self.position = nn.Embedding(128, 256)
+        self.blocks = nn.Sequential(*[GPTBlock(256, 128, 32, 0.2, 'cpu') for _ in range(6)])
+        self.n = nn.LayerNorm(256)
+        self.lout = nn.Linear(256, 31405)
 
 
     def forward(
@@ -113,7 +113,7 @@ class GPT(nn.Module):
         }
 
 
-    def generate(self, x, max_length=10):
+    def generate(self, x, max_length=50):
         for _ in range(max_length):
             logits = self(x)['logits'][:,-1,:]
             prob = F.softmax(logits, dim=-1)
@@ -121,3 +121,4 @@ class GPT(nn.Module):
             x = torch.cat((x, out), dim=-1)
 
         return x
+    
