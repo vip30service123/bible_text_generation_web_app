@@ -1,8 +1,8 @@
 import torch
 
 
-from src.model import GPT
-from src.process_data import *
+from bible_text_generation_web_app.src.model import GPT
+from bible_text_generation_web_app.src.process_data import *
 
 
 

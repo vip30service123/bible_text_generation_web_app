@@ -1,4 +1,4 @@
-from src.constant import *
+from bible_text_generation_web_app.src.constant import *
 
 
 def process_string_to_list(input):
