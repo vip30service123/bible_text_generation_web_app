@@ -6,7 +6,6 @@ from bible_text_generation_web_app.src.generate import TextGenerationFactory
 
 
 
-
 with open('configuration.yaml', 'r') as f:
     configs = yaml.safe_load(f)
 
