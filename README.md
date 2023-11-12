@@ -11,7 +11,7 @@ conda activate {env_name} </br>
 conda install pip </br>
 pip install -r requirements.txt </br>
 #### **Run App**
-flask --app main.py run
+flask --app main.py run </br>
 Open web browser, go to localhost:5000
 
 ## **Setup with Docker **
