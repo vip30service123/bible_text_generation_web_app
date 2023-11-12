@@ -130,11 +130,17 @@ class GPT(nn.Module):
 
 
     def generate(self, x, max_length: int = 50) -> str:
+        input = torch.clone(x)
+
         for _ in range(max_length):
             logits = self(x)['logits'][:,-1,:]
             prob = F.softmax(logits, dim=-1)
             out = torch.multinomial(prob, 1)
             x = torch.cat((x, out), dim=-1)
 
-        return x
+        return {
+            'input': input,
+            'generate': x[:, input.shape[1]:],
+            'full': x
+        }
     

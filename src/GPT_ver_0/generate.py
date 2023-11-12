@@ -9,7 +9,7 @@ class Generation:
     def __init__(self, *args, **kwargs):              
         self.model = GPT()
         self.model.load_state_dict(
-            torch.load('src/GPT_ver_0/GPT.pt', 
+            torch.load('src/GPT_ver_0/GPT_0.pt', 
             map_location=torch.device('cpu'))
         )
 
@@ -21,7 +21,7 @@ class Generation:
 
         out = self.model.generate(encoded_input_tensor)
 
-        return ' '.join(decode_input(out.tolist()[0]))
+        return ' '.join([text.strip()] + decode_input(out['generate'].tolist()[0]))
 
 
 
