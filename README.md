@@ -14,7 +14,7 @@ pip install -r requirements.txt </br>
 flask --app main.py run </br>
 Open web browser, go to localhost:5000
 
-## **Setup with Docker **
+## **Setup with Docker**
 #### **Clone**
 git clone https://github.com/vip30service123/bible_text_generation_web_app.git </br>
 cd bible_text_generation_web_app
