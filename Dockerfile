@@ -4,7 +4,7 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/engine/reference/builder/
 
-ARG PYTHON_VERSION=3.11
+ARG PYTHON_VERSION=3.10.13
 FROM python:${PYTHON_VERSION}-slim as base
 
 # Prevents Python from writing pyc files.
@@ -46,4 +46,4 @@ COPY . .
 EXPOSE 5000
 
 # Run the application.
-CMD flask --app main.py run
+CMD flask --app bible_app run --host=0.0.0.0

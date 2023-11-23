@@ -1,7 +1,7 @@
 from typing import List
 
 
-from bible_text_generation_web_app.src.GPT_ver_1.constant import *
+from .constant import *
 
 
 def process_string_to_list(input):

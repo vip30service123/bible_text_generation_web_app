@@ -1,8 +1,8 @@
 '''
 Text generation factory
 '''
-from bible_text_generation_web_app.src.GPT_ver_0 import generate as generate_ver_0
-from bible_text_generation_web_app.src.GPT_ver_1 import generate as generate_ver_1
+from .GPT_ver_0 import generate as generate_ver_0
+from .GPT_ver_1 import generate as generate_ver_1
 
 
 class TextGenerationFactory:

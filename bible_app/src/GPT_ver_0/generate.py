@@ -1,15 +1,15 @@
 import torch
 
 
-from bible_text_generation_web_app.src.GPT_ver_0.model import GPT
-from bible_text_generation_web_app.src.GPT_ver_0.process_data import *
+from .model import GPT
+from .process_data import *
 
 
 class Generation:
     def __init__(self, *args, **kwargs):              
         self.model = GPT()
         self.model.load_state_dict(
-            torch.load('src/GPT_ver_0/GPT_0.pt', 
+            torch.load('bible_app/src/GPT_ver_0/GPT_0.pt', 
             map_location=torch.device('cpu'))
         )
 
