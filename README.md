@@ -21,3 +21,8 @@ cd bible_text_generation_web_app
 #### **Run Docker**
 docker compose up --build </br>
 Open web browser, go to localhost:5000
+
+## **Unfinished Tasks**
+CI/CD </br>
+Deploy using waitress </br>
+Update Model </br>
