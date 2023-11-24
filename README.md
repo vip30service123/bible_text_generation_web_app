@@ -22,6 +22,9 @@ cd bible_text_generation_web_app
 docker compose up --build </br>
 Open web browser, go to localhost:5000
 
+## **Dev**
+Before commiting, reformatting the code by "black bible_app", "black tests" or "python -m black bible_app" and "python -m black tests" </br>
+
 ## **Unfinished Tasks**
 CI/CD </br>
 Deploy using waitress </br>

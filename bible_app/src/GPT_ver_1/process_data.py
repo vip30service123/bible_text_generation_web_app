@@ -11,11 +11,11 @@ def process_string_to_list(input):
     for j in range(len(input)):
         if input[j] not in SPECIAL_CHA:
             if input[i] in SPECIAL_CHA:
-                if input[i:j] != ' ':
+                if input[i:j] != " ":
                     out.append(input[i:j])
                 i = j
         else:
-            if input[i:j] != ' ':
+            if input[i:j] != " ":
                 out.append(input[i:j])
             i = j
 
@@ -30,7 +30,7 @@ def encode_input(str_ls: List[str]) -> List[int]:
         if string in ENCODER:
             output.append(ENCODER[string])
         else:
-            output.append(ENCODER['**'])
+            output.append(ENCODER["**"])
     return output
 
 

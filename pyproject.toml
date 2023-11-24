@@ -7,7 +7,9 @@ dependencies = [
     "pyyaml",
     "torch",
     "waitress",
-    "numpy"
+    "numpy",
+    "black",
+    "pytest"
 ]
 
 [build-system]

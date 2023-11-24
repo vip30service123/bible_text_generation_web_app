@@ -1,3 +1,7 @@
 flask
 pyyaml
 torch
+waitress
+numpy
+black
+pytest

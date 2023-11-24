@@ -5,7 +5,7 @@ from .constant import *
 
 
 def process_string_to_list(input: str) -> List[str]:
-    return input.strip().split(' ')
+    return input.strip().split(" ")
 
 
 def encode_input(str_ls: List[str]) -> List[int]:
@@ -14,7 +14,7 @@ def encode_input(str_ls: List[str]) -> List[int]:
         if string in ENCODER:
             output.append(ENCODER[string])
         else:
-            output.append(ENCODER['**'])
+            output.append(ENCODER["**"])
     return output
 
 
