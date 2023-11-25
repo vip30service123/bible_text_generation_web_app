@@ -27,5 +27,4 @@ Before commiting, reformatting the code by "black bible_app", "black tests" or "
 
 ## **Unfinished Tasks**
 CI/CD </br>
-Deploy using waitress </br>
 Update Model </br>

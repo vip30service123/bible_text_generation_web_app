@@ -43,7 +43,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 USER appuser
 
 # Expose the port that the application listens on.
-EXPOSE 5000
+EXPOSE 8080
 
 # Run the application.
-CMD flask --app bible_app run --host=0.0.0.0
+CMD waitress-serve --port 5000 --call 'bible_app:create_app'
