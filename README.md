@@ -27,4 +27,5 @@ Before commiting, reformatting the code by "black bible_app", "black tests" or "
 
 ## **Unfinished Tasks**
 CI/CD </br>
+Structure model foldler </br>
 Update Model </br>
